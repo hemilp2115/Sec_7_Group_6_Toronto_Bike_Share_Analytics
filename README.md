@@ -9,34 +9,44 @@
 
 ---
 
-## 🧭 Project Overview  
-The **Toronto Bike-Sharing Analytics Tool** is a Python-based analytics dashboard that visualizes insights from the Toronto Bike Share Ridership dataset.  
+This project implements an analytics tool for Toronto Bike-Sharing ridership data, built as a dashboard using Python and Streamlit.
 
-The project follows the **Agile Scrum framework** over two sprints, emphasizing collaboration, Test-Driven Development (TDD), and continuous improvement.  
+## Project Overview
+* **Goal:** Analyze ridership patterns (duration, station usage, user types).
+* **Team Size:** 4 Members
+* **Duration:** Two 1-week Sprints
+* **Technology Stack:** Python, Pandas, Streamlit, Pytest (for TDD)
 
-Our goal is to help users quickly explore key metrics such as **busiest stations, average trip duration, and peak usage hours**, using a clean, interactive dashboard built with **Streamlit**.
+## 🛠️ Environment Setup
 
----
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/hemilp2115/Sec_7_Group_6_Toronto_Bike_Share_Analytics.git
+    cd Sec_7_Group_6_Toronto_Bike_Share_Analytics
+    ```
 
-## 🎯 Objectives  
-- Apply **Agile principles** (Scrum, Sprints, User Stories, TDD, Refactoring).  
-- Develop a **modular, reusable Python codebase**.  
-- Build an **interactive data visualization dashboard**.  
-- Demonstrate collaboration using **GitHub** and **Taiga**.  
-- Measure productivity using **Agile metrics** (Burndown & Velocity charts).  
+2.  **Create and Activate Virtual Environment:**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # macOS/Linux
+    .\venv\Scripts\activate   # Windows
+    ```
 
----
+3.  **Install Dependencies:**
+    ```bash
+    pip install pandas streamlit pytest
+    ```
 
-## 🧩 Features  
-✅ Load and clean raw ridership data  
-✅ Compute key statistics and summaries  
-✅ Visualize top stations, peak hours, and trip durations  
-✅ Run with Streamlit for interactivity  
-✅ Test-Driven Development using pytest  
-✅ Refactored modular design for maintainability  
-✅ Follows full Agile process documentation  
+## 🚀 How to Run the Tool
+1.  Ensure the `Bike share ridership 2024-08.csv` file is in the project root.
+2.  Run the Streamlit application:
+    ```bash
+    streamlit run app.py
+    ```
 
----
+## 🔗 Project Management
+* **Taiga Project:** https://tree.taiga.io/project/harshpatel15-sec_7_group_6_agile_final_project/timeline
+
 
 
 
