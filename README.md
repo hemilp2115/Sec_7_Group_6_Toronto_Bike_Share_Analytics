@@ -38,5 +38,5 @@ Our goal is to help users quickly explore key metrics such as **busiest stations
 
 ---
 
-## 🗂️ Project Structure  
+
 
