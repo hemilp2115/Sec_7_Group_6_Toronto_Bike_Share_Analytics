@@ -1,7 +1,6 @@
 # 🚴 Toronto Bike-Sharing Analytics Tool  
 
 **Course:** Agile Software Development  
-**Project Weight:** 40% of Final Grade  
 **Team Members:**  
 - Gaurav Patel  
 - Himani Panchal  
