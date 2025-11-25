@@ -3,10 +3,10 @@
 **Course:** Agile Software Development  
 **Project Weight:** 40% of Final Grade  
 **Team Members:**  
-- Gaurav Patel (Data & Testing Lead)  
-- Himani Patel (Dashboard Lead)  
-- Jimilkumar Patel (Agile & GitHub Lead)  
-- Rudra Patel (Analysis Lead)  
+- Gaurav Patel  
+- Himani Panchal  
+- Hemilkumar Patel  
+- Harsh Patel   
 
 ---
 
