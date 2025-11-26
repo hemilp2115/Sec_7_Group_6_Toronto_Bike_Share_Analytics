@@ -21,10 +21,13 @@ def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
     """
     new_columns = {}
     for col in df.columns:
-        # Fix double spaces and convert to snake_case
-        cleaned_col = col.replace('  ', ' ').lower().replace(' ', '_')
+        # 1. Fix double spaces (e.g., 'Trip  Duration' -> 'Trip Duration')
+        cleaned_col = col.replace('  ', ' ') 
+        # 2. Convert to snake_case (lowercase and replace single spaces with _)
+        cleaned_col = cleaned_col.lower().replace(' ', '_')
         new_columns[col] = cleaned_col
     
+    # Rename the columns using the dictionary mapping
     return df.rename(columns=new_columns)
 
 # --- US-03: Convert Date Columns (Placeholder for Member C) ---
