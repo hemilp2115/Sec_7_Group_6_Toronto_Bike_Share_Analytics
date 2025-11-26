@@ -19,15 +19,18 @@ def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
     """
     Converts column names to snake_case and fixes known issues like double spaces.
     """
-    new_columns = {}
-    for col in df.columns:
-        # 1. Fix double spaces (e.g., 'Trip  Duration' -> 'Trip Duration')
-        cleaned_col = col.replace('  ', ' ') 
-        # 2. Convert to snake_case (lowercase and replace single spaces with _)
-        cleaned_col = cleaned_col.lower().replace(' ', '_')
-        new_columns[col] = cleaned_col
     
-    # Rename the columns using the dictionary mapping
+    # --- REFACTOR IMPROVEMENT: Using a dictionary comprehension ---
+    
+    # 1. Define the function to clean a single column string
+    def clean_name(col):
+        # Fix double spaces, lowercase, and replace single spaces with underscore
+        return col.replace('  ', ' ').lower().replace(' ', '_')
+    
+    # 2. Use a dictionary comprehension to map old names to new names
+    new_columns = {col: clean_name(col) for col in df.columns}
+    
+    # 3. Rename the columns
     return df.rename(columns=new_columns)
 
 # --- US-03: Convert Date Columns (Placeholder for Member C) ---
