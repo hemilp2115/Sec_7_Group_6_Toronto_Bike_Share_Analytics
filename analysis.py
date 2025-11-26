@@ -35,9 +35,27 @@ def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
 
 # --- US-03: Convert Date Columns (Placeholder for Member C) ---
 def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
-    """Converts 'Start Time' and 'End Time' to datetime objects."""
-    # Member C will implement the logic here
-    return df
+    """
+    Converts specified time columns to datetime objects using a standard format.
+    """
+    # Define the columns and format clearly as constants
+    DATE_COLUMNS = ['start_time', 'end_time']
+    DATE_FORMAT = '%m/%d/%Y %H:%M'
+    
+    # Use .copy() to prevent SettingWithCopyWarning if downstream changes occur
+    processed_df = df.copy() 
+    
+    for col in DATE_COLUMNS:
+        # Process each column cleanly
+        processed_df[col] = pd.to_datetime(
+            processed_df[col], 
+            format=DATE_FORMAT, 
+            errors='coerce' # Converts unparseable dates to NaT
+        )
+        
+    return processed_df
+
+
 
 # --- US-09: Analyze User Types (Placeholder for Member A Day 2) ---
 def get_user_type_distribution(df: pd.DataFrame) -> pd.Series:
