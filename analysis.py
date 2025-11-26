@@ -36,17 +36,25 @@ def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
 # --- US-03: Convert Date Columns (Placeholder for Member C) ---
 def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Converts 'Start Time' and 'End Time' to datetime objects.
-    Assumes US-02 (clean columns) has been run.
+    Converts specified time columns to datetime objects using a standard format.
     """
-    # The format is 'MM/DD/YYYY HH:MM'
-    date_format = '%m/%d/%Y %H:%M'
+    # Define the columns and format clearly as constants
+    DATE_COLUMNS = ['start_time', 'end_time']
+    DATE_FORMAT = '%m/%d/%Y %H:%M'
     
-    # Use errors='coerce' to turn invalid/missing dates into NaT
-    df['start_time'] = pd.to_datetime(df['start_time'], format=date_format, errors='coerce')
-    df['end_time'] = pd.to_datetime(df['end_time'], format=date_format, errors='coerce')
+    # Use .copy() to prevent SettingWithCopyWarning if downstream changes occur
+    processed_df = df.copy() 
     
-    return df
+    for col in DATE_COLUMNS:
+        # Process each column cleanly
+        processed_df[col] = pd.to_datetime(
+            processed_df[col], 
+            format=DATE_FORMAT, 
+            errors='coerce' # Converts unparseable dates to NaT
+        )
+        
+    return processed_df
+
 
 
 # --- US-09: Analyze User Types (Placeholder for Member A Day 2) ---
