@@ -14,11 +14,18 @@ def load_data(filepath: str) -> pd.DataFrame:
         print(f"Error: File not found at {filepath}")
         return pd.DataFrame()
 
-# --- US-02: Clean Column Names (Placeholder for Member B) ---
+# --- US-02: Clean Column Names https://tree.taiga.io/project/harshpatel15-sec_7_group_6_agile_final_project/task/15 (Himani and Harsh) ---
 def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
-    """Converts column names to snake_case and fixes known issues."""
-    # Member B will implement the logic here
-    return df 
+    """
+    Converts column names to snake_case and fixes known issues like double spaces.
+    """
+    new_columns = {}
+    for col in df.columns:
+        # Fix double spaces and convert to snake_case
+        cleaned_col = col.replace('  ', ' ').lower().replace(' ', '_')
+        new_columns[col] = cleaned_col
+    
+    return df.rename(columns=new_columns)
 
 # --- US-03: Convert Date Columns (Placeholder for Member C) ---
 def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
