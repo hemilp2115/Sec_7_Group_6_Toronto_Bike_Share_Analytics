@@ -41,7 +41,7 @@ def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
     # Define the columns and format clearly as constants
     DATE_COLUMNS = ['start_time', 'end_time']
     DATE_FORMAT = '%m/%d/%Y %H:%M'
-    
+ 
     # Use .copy() to prevent SettingWithCopyWarning if downstream changes occur
     processed_df = df.copy() 
     
@@ -59,9 +59,14 @@ def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
 
 # --- US-09: Analyze User Types (Placeholder for Member A Day 2) ---
 def get_user_type_distribution(df: pd.DataFrame) -> pd.Series:
-    """Calculates the count of trips by User Type."""
-    # Member A will implement the logic here
-    return pd.Series() # Return a placeholder Series
+    """
+    Calculates the count of trips by User Type (Annual Member vs Casual Member).
+    Assumes US-02 has been run and column is named 'user_type'.
+    """
+    # Use value_counts() for a Series of counts
+    user_counts = df['user_type'].value_counts(dropna=True)
+    
+    return user_counts
 
 if __name__ == '__main__' :
     
