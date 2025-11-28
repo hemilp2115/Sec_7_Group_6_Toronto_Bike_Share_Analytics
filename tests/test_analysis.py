@@ -1,6 +1,8 @@
 import pandas as pd
 import pytest
-from analysis import clean_column_names, convert_dates 
+# --- NEW IMPORTS ---
+from data_processor import clean_column_names, convert_dates 
+# from analysis import get_user_type_distribution # Keep analysis imports if needed for other tests
 
 # Fixture to simulate the raw DataFrame structure
 @pytest.fixture
