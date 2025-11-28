@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
-# Import all final completed functions
-from analysis import load_data, clean_column_names, convert_dates, get_user_type_distribution
+# IMPORT FIX: Change the source of the core functions
+from data_processor import load_data, clean_column_names, convert_dates 
+# Import analysis functions that remain in analysis.py
+from analysis import get_user_type_distribution
 
 # Define the file path
 DATA_FILEPATH = 'Bike share ridership 2024-08.csv.gz' 
@@ -10,7 +12,7 @@ DATA_FILEPATH = 'Bike share ridership 2024-08.csv.gz'
 def main():
     st.set_page_config(layout="wide", page_title="Toronto Bike-Sharing Analytics")
 
-    st.title("🚴 Toronto Bike-Sharing Analytics Dashboard (Sprint 1 Complete)")
+    st.title("Toronto Bike-Sharing Analytics Dashboard (Sprint 1 Complete)")
     st.markdown("---")
 
     # 1. Load Data (US-01)
