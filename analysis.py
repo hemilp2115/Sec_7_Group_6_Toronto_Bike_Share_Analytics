@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # This block demonstrates the functionality of the analysis module.
     
     # 1. Define the file path (use the actual file name from your project)
-    FILEPATH = 'Bike share ridership 2024-08.csv' 
+    FILEPATH = 'Bike share ridership 2024-08.csv.gz' 
     
     # 2. Load the data
     raw_data = load_data(FILEPATH)
