@@ -17,6 +17,22 @@ def get_user_type_distribution(df: pd.DataFrame) -> pd.Series:
     
     return user_counts
 
+def create_duration_buckets(df: pd.DataFrame) -> pd.Series:
+    """
+    Categorizes trip durations (in seconds) into meaningful time buckets.
+    """
+    # Define bins based on common Toronto trip lengths (e.g., 0-10 min, 10-30 min)
+    bins = [0, 600, 1800, df['trip_duration'].max() + 1] 
+    labels = ['Short (0-10m)', 'Medium (10-30m)', 'Long (>30m)']
+    
+    # Use pd.cut to categorize the data, assumes trip_duration is clean and exists
+    df['duration_bucket'] = pd.cut(
+        df['trip_duration'], 
+        bins=bins, 
+        labels=labels, 
+        right=False # Sets the interval to be inclusive of the left side
+    )
+    return df['duration_bucket'].value_counts()
 
 if __name__ == '__main__':
     # This block demonstrates the functionality of the analysis module.
