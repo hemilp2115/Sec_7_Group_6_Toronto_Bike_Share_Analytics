@@ -49,6 +49,17 @@ def get_avg_duration_by_hour(df: pd.DataFrame) -> pd.Series:
     
     return avg_duration
 
+# --- US-05: Daily Trip Counts (Placeholder) ---
+def count_trips_by_day(df: pd.DataFrame) -> pd.Series:
+    """Calculates the total number of trips for each date."""
+    df_temp = df.copy()
+    
+    # Use floor('D') to keep it as a Timestamp (compatible with string indexing in tests)
+    # This fixes the KeyError you saw earlier!
+    df_temp['date'] = df_temp['start_time'].dt.floor('D')
+    
+    return df_temp.groupby('date').size()
+
 if __name__ == '__main__':
     # This block demonstrates the functionality of the analysis module.
     
