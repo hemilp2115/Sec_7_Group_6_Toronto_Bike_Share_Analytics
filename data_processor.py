@@ -56,3 +56,25 @@ def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
         )
         
     return processed_df
+
+# US-04:filter invalid trips 
+def filter_invalid_trips(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Filters out trips with unrealistic durations to ensure analysis quality.
+    
+    Criteria:
+    - Removes trips shorter than 60 seconds (1 minute).
+    - Removes trips longer than 10,800 seconds (3 hours).
+    """
+    # Define constants to avoid 'magic numbers'
+    MIN_DURATION_SECONDS = 60
+    MAX_DURATION_SECONDS = 10800 # 3 hours
+    
+    # Use boolean indexing to filter the data
+    # We use .copy() to ensure we return a new DataFrame, preventing SettingWithCopyWarning
+    valid_trips = df[
+        (df['trip_duration'] >= MIN_DURATION_SECONDS) & 
+        (df['trip_duration'] <= MAX_DURATION_SECONDS)
+    ].copy()
+    
+    return valid_trips
