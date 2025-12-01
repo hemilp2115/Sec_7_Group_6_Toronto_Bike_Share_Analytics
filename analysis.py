@@ -89,3 +89,6 @@ if __name__ == '__main__':
         print(trip_duration_buckets)
     else:
         print("Data loading failed. Check FILEPATH.")
+
+def filter_invalid_trips(df: pd.DataFrame) -> pd.DataFrame:
+   pass
