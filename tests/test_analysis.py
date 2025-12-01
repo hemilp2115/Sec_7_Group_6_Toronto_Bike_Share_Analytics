@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 # --- NEW IMPORTS ---
-from data_processor import clean_column_names, convert_dates 
+from data_processor import clean_column_names, convert_dates,filter_invalid_trips
 from analysis import count_trips_by_day  # Keep analysis imports if needed for other tests
 
 # Fixture to simulate the raw DataFrame structure
@@ -61,3 +61,11 @@ def test_count_trips_by_day_fails():
     assert len(result) == 2
     assert result.loc['2024-08-01'] == 2
     assert result.loc['2024-08-02'] == 1
+
+#US-04 filter invalid trips
+def test_filter_invalid_trips():
+    # Create data with 1 short trip (30s) and 1 valid trip (120s)
+    df = pd.DataFrame({'trip_duration': [30, 120]})
+    result = filter_invalid_trips(df)
+    assert len(result) == 1
+    assert result.iloc[0]['trip_duration'] == 120
