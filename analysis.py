@@ -34,6 +34,15 @@ def create_duration_buckets(df: pd.DataFrame) -> pd.Series:
     )
     return df['duration_bucket'].value_counts()
 
+# --- US-05: Daily Trip Counts (Placeholder) ---
+def count_trips_by_day(df: pd.DataFrame) -> pd.Series:
+    """
+    Placeholder for US-05.
+    Calculates the total number of trips for each date.
+    """
+    # We return an empty Series or None to ensure the test runs but fails the assertion
+    return pd.Series(dtype='int')
+
 if __name__ == '__main__':
     # This block demonstrates the functionality of the analysis module.
     

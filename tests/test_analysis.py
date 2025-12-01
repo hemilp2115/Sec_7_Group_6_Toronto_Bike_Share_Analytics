@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 # --- NEW IMPORTS ---
 from data_processor import clean_column_names, convert_dates 
-# from analysis import get_user_type_distribution # Keep analysis imports if needed for other tests
+from analysis import count_trips_by_day  # Keep analysis imports if needed for other tests
 
 # Fixture to simulate the raw DataFrame structure
 @pytest.fixture
@@ -39,3 +39,25 @@ def test_us03_convert_dates_fails(raw_df):
     # 2. ASSERT: Check that the DataFrame column type is datetime64
     assert pd.api.types.is_datetime64_any_dtype(processed_df['start_time'])
     assert pd.api.types.is_datetime64_any_dtype(processed_df['end_time'])
+
+# --- US-05 TDD: RED Phase ---
+def test_count_trips_by_day_fails():
+    """
+    Tests that trips are correctly counted by date.
+    MUST FAIL initially.
+    """
+    # Create a simple dataframe with timestamps spanning two days
+    data = {'start_time': pd.to_datetime([
+        '2024-08-01 08:00', '2024-08-01 09:00', # 2 trips on Aug 1
+        '2024-08-02 10:00'                      # 1 trip on Aug 2
+    ])}
+    df = pd.DataFrame(data)
+    
+    # ACT
+    result = count_trips_by_day(df)
+    
+    # ASSERT
+    # Expecting a Series where index is date and value is count
+    assert len(result) == 2
+    assert result.loc['2024-08-01'] == 2
+    assert result.loc['2024-08-02'] == 1
