@@ -34,6 +34,21 @@ def create_duration_buckets(df: pd.DataFrame) -> pd.Series:
     )
     return df['duration_bucket'].value_counts()
 
+def get_avg_duration_by_hour(df: pd.DataFrame) -> pd.Series:
+    """
+    Calculates the average trip duration for each hour of the day.
+    """
+    # Create a copy to avoid SettingWithCopyWarning on the original dataframe
+    df_temp = df.copy()
+    
+    # Extract the hour (0-23) from the 'start_time' column
+    df_temp['hour'] = df_temp['start_time'].dt.hour
+    
+    # Group by the hour and calculate the mean of 'trip_duration'
+    avg_duration = df_temp.groupby('hour')['trip_duration'].mean()
+    
+    return avg_duration
+
 if __name__ == '__main__':
     # This block demonstrates the functionality of the analysis module.
     
@@ -56,5 +71,10 @@ if __name__ == '__main__':
         
         print("\n--- User Type Distribution (US-09) ---")
         print(distribution)
+
+        trip_duration_buckets = get_avg_duration_by_hour(processed_data)
+
+        print("\n--- Peak hour analysis (US-05) ---")
+        print(trip_duration_buckets)
     else:
         print("Data loading failed. Check FILEPATH.")
