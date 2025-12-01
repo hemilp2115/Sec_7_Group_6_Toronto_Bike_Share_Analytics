@@ -91,3 +91,4 @@ if __name__ == '__main__':
         print("Data loading failed. Check FILEPATH.")
 
 def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
+    pass
