@@ -91,4 +91,14 @@ if __name__ == '__main__':
         print("Data loading failed. Check FILEPATH.")
 
 def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
-    pass
+    """
+    Returns the top 'n' start stations by number of trips.
+    Returns a DataFrame with columns ['start_station_name', 'count'].
+    """
+    # Count values and take top n
+    counts = df['start_station_name'].value_counts().head(n).reset_index()
+    
+    # Rename columns for clarity (reset_index creates 'index' or the original name)
+    counts.columns = ['start_station_name', 'count']
+    
+    return counts
