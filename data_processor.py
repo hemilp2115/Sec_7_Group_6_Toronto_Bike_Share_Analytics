@@ -56,3 +56,8 @@ def convert_dates(df: pd.DataFrame) -> pd.DataFrame:
         )
         
     return processed_df
+
+# US-04:filter invalid trips 
+def filter_invalid_trips(df: pd.DataFrame) -> pd.DataFrame:
+    """Filters out trips shorter than 60 seconds."""
+    return df[df['trip_duration'] >= 60].copy()
