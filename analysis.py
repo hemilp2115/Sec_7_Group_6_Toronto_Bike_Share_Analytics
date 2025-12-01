@@ -90,5 +90,4 @@ if __name__ == '__main__':
     else:
         print("Data loading failed. Check FILEPATH.")
 
-def filter_invalid_trips(df: pd.DataFrame) -> pd.DataFrame:
-   pass
+def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
