@@ -89,3 +89,33 @@ if __name__ == '__main__':
         print(trip_duration_buckets)
     else:
         print("Data loading failed. Check FILEPATH.")
+
+def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
+    """
+    Identifies the top 'n' most popular starting stations based on trip frequency.
+    
+    Refactored for robustness:
+    - Handles missing columns gracefully.
+    - Uses method chaining for cleaner syntax.
+    - Explicitly names columns for consistent output.
+    """
+    # Safety Check: Return empty DF if the required column is missing
+    # This prevents the app from crashing if data is malformed
+    if 'start_station_name' not in df.columns:
+        return pd.DataFrame(columns=['start_station_name', 'count'])
+
+    # Optimization: value_counts() is the fastest Pandas method for frequency
+    # We use method chaining for readability
+    top_stations = (
+        df['start_station_name']
+        .value_counts()
+        .head(n)
+        .reset_index()
+    )
+    
+    # Explicit renaming ensures the output format is always [Station Name, Count]
+    # regardless of the Pandas version or input Series name
+    top_stations.columns = ['start_station_name', 'count']
+    
+    return top_stations
+

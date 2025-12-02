@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 # --- NEW IMPORTS ---
 from data_processor import clean_column_names, convert_dates,filter_invalid_trips
-from analysis import count_trips_by_day  # Keep analysis imports if needed for other tests
+from analysis import count_trips_by_day, get_top_start_stations  # Keep analysis imports if needed for other tests
 
 # Fixture to simulate the raw DataFrame structure
 @pytest.fixture
@@ -69,3 +69,16 @@ def test_filter_invalid_trips():
     result = filter_invalid_trips(df)
     assert len(result) == 1
     assert result.iloc[0]['trip_duration'] == 120
+
+#US-06: Get top start stations
+def test_get_top_start_stations():
+    """Test identifying top start stations."""
+    # 'Union Station' appears 3 times, 'Bloor' 2 times
+    df = pd.DataFrame({'start_station_name': ['Union', 'Union', 'Bloor', 'King', 'Union', 'Bloor']})
+    
+    # Get top 1 station
+    result = get_top_start_stations(df, n=1)
+    
+    assert len(result) == 1
+    assert result.iloc[0]['start_station_name'] == 'Union'
+    assert result.iloc[0]['count'] == 3
