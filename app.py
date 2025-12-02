@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 # IMPORT FIX: Change the source of the core functions
 from data_processor import load_data, clean_column_names, convert_dates 
 # Import analysis functions that remain in analysis.py
@@ -56,6 +57,27 @@ def main():
     
     st.subheader("Processed Data Preview (First 5 Rows)")
     st.dataframe(data.head())
+
+    st.subheader("User Type Distribution (US-11 Pie Chart)")
+
+# Get data from existing function
+    user_counts = get_user_type_distribution(data)
+
+# Create a dataframe for the chart
+    chart_data = pd.DataFrame({
+    'User Type': user_counts.index,
+    'Count': user_counts.values
+    })
+
+# Display as a donut chart or pie chart
+    st.altair_chart(
+        alt.Chart(chart_data).mark_arc(innerRadius=50).encode(
+            theta=alt.Theta(field="Count", type="quantitative"),
+            color=alt.Color(field="User Type", type="nominal"),
+            tooltip=['User Type', 'Count']
+        ),
+        use_container_width=True
+    )
 
 
 if __name__ == "__main__":
