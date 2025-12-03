@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+
 # IMPORT FIX: Change the source of the core functions
 from data_processor import load_data, clean_column_names, convert_dates 
 # Import analysis functions that remain in analysis.py
-from analysis import get_user_type_distribution, create_duration_buckets
+from analysis import get_user_type_distribution, create_duration_buckets,get_avg_duration_by_hour,count_trips_by_day
 
 # Define the file path
 DATA_FILEPATH = 'Bike share ridership 2024-08.csv.gz' 
@@ -69,7 +70,7 @@ def main():
     'Count': user_counts.values
     })
 
-# Display as a donut chart or pie chart
+    # US-11 Display as a donut chart or pie chart
     st.altair_chart(
         alt.Chart(chart_data).mark_arc(innerRadius=50).encode(
             theta=alt.Theta(field="Count", type="quantitative"),
@@ -78,6 +79,15 @@ def main():
         ),
         use_container_width=True
     )
+    # US - 7
+    st.markdown("---")
+    st.subheader("Daily Trip Trends (US-07)")
+
+    # 1. Get the data
+    daily_counts = count_trips_by_day(data)
+
+    # 2. Display Line Chart
+    st.line_chart(daily_counts)
 
 
 if __name__ == "__main__":
