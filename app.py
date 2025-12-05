@@ -54,8 +54,7 @@ def main():
         filtered_data = processed_data[processed_data['user_type'].isin(selected_user_types)]
 
     # --- 3. DASHBOARD MAIN AREA ---
-    st.title("Toronto Bike-Sharing Analytics") # Removed emoji
-    st.markdown("### Sprint 2 Final Deliverable")
+    st.title("Toronto Bike-Sharing Analytics", text_alignment='center') # Removed emoji
     st.markdown("---")
 
     # --- ROW 1: KPI METRICS ---
