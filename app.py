@@ -141,5 +141,5 @@ def main():
         st.subheader("Filtered Data Preview") # Removed emoji
         st.dataframe(filtered_data.head(10), use_container_width=True)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()

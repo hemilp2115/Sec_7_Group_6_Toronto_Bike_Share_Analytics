@@ -60,15 +60,6 @@ def count_trips_by_day(df: pd.DataFrame) -> pd.Series:
     
     return df_temp.groupby('date').size()
 
-if __name__ == '__main__':
-    # This block demonstrates the functionality of the analysis module.
-    
-    # 1. Define the file path (use the actual file name from your project)
-    FILEPATH = 'Bike share ridership 2024-08.csv.gz' 
-    
-    # 2. Load the data
-    raw_data = load_data(FILEPATH)
-
 def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
     """
     Identifies the top 'n' most popular starting stations based on trip frequency.
@@ -98,27 +89,35 @@ def get_top_start_stations(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
     
     return top_stations
 
+if __name__ == '__main__':
+    # This block demonstrates the functionality of the analysis module.
+    
+    # 1. Define the file path (use the actual file name from your project)
+    FILEPATH = 'Bike share ridership 2024-08.csv.gz' 
+    
+    # 2. Load the data
+    raw_data = load_data(FILEPATH)
 
-if not raw_data.empty:
-        # 3. Apply the full processing pipeline (US-02 and US-03 from data_processor)
-        processed_data = clean_column_names(raw_data.copy())
-        processed_data = convert_dates(processed_data)
-        
-        print("\n--- Processed Data Head ---")
-        print(processed_data.head())
-        
-        # 4. Run the US-09 analysis function
-        distribution = get_user_type_distribution(processed_data)
-        
-        print("\n--- User Type Distribution (US-09) ---")
-        print(distribution)
+    if not raw_data.empty:
+            # 3. Apply the full processing pipeline (US-02 and US-03 from data_processor)
+            processed_data = clean_column_names(raw_data.copy())
+            processed_data = convert_dates(processed_data)
+            
+            print("\n--- Processed Data Head ---")
+            print(processed_data.head())
+            
+            # 4. Run the US-09 analysis function
+            distribution = get_user_type_distribution(processed_data)
+            
+            print("\n--- User Type Distribution (US-09) ---")
+            print(distribution)
 
-        trip_duration_buckets = get_avg_duration_by_hour(processed_data)
+            trip_duration_buckets = get_avg_duration_by_hour(processed_data)
 
-        print("\n--- Peak hour analysis (US-05) ---")
-        print(trip_duration_buckets)
-else:
-        print("Data loading failed. Check FILEPATH.")
+            print("\n--- Peak hour analysis (US-05) ---")
+            print(trip_duration_buckets)
+    else:
+            print("Data loading failed. Check FILEPATH.")
 
 
 
