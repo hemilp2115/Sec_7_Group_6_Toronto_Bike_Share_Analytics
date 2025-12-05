@@ -32,12 +32,13 @@ def main():
     # US-08: KPI Metrics 
     col1, col2, col3 = st.columns(3)
     total_trips = len(data)
+    avg_duration_str = get_avg_duration_by_hour(raw_data)
     
     with col1:
         st.metric("Total Trips Processed", f"{total_trips:,}")
     
     with col2:
-        st.metric("Avg Trip Duration", "TBD (Sprint 2 Analytics)") 
+        st.metric("Avg Trip Duration", avg_duration_str)
     
     with col3:
         # Calculate percentage for US-09 KPI
