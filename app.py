@@ -133,7 +133,7 @@ def main():
     row4_col1, row4_col2 = st.columns((1, 2))
     
     with row4_col1:
-        st.subheader("Top 5 Start Stations (US-06)") # Removed emoji
+        st.subheader("Top 5 Start Stations") # Removed emoji
         top_stations = get_top_start_stations(filtered_data, n=5)
         st.dataframe(top_stations, use_container_width=True, hide_index=True)
         
